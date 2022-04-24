@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">CTC</string>
     <string name="title_favorite">Home</string>
-    <string name="title_map">Maps</string>
-    <string name="title_vehiculos">Vehiculos</string>
+    <string name="title_map">My Garden</string>
+    <string name="title_vehiculos">News</string>
     <string name="clave_api">AIzaSyDYxT41-fzBhkd6_EKBjTEnX-dP9rrA1XA</string>
     <string name="claveapi_place">AIzaSyCVgZgkGZjYbmC41e1Nzdl_hl_Gv0Y2IbY</string>
 
