@@ -41,7 +41,7 @@ class FavoriteFragment : Fragment() {
 
         rv_Favoritos.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        //listavehiculos.adapter = AdaptadorElementos()
+
         var llenarLista = ArrayList<Elementos>()
         AsyncTask.execute {
             val queue = Volley.newRequestQueue(activity)
@@ -58,9 +58,11 @@ class FavoriteFragment : Fragment() {
                                 response.getJSONObject(i).getString("nombre")
                             val informacion =
                                 response.getJSONObject(i).getString("informacion")
+                            val nombre_c =
+                                response.getJSONObject(i).getString("nombre_cientifico")
                             val imagen =
                                 response.getJSONObject(i).getString("img")
-                            llenarLista.add(Elementos(id, rfc, nombre, informacion, imagen))
+                            llenarLista.add(Elementos(id, rfc, nombre, informacion, nombre_c, imagen))
                         }
                         adapter = AdaptadorElementos(llenarLista)
                         rv_Favoritos.adapter = adapter

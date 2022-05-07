@@ -30,7 +30,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
     var llenarLista = ArrayList<Elementos>()
-    private var adapter: RecyclerView.Adapter<AdaptadorElementos.ViewHolder>? = null
+    private var adapter: RecyclerView.Adapter<AdaptadorElementosPlantas.ViewHolder>? = null
 
     private val Plaza = LatLng(-16.3988031,-71.5374435)
     private lateinit var mMap:GoogleMap
@@ -56,28 +56,29 @@ class SearchFragment : Fragment() {
         super.onViewCreated(itemView, savedInstanceState)
         
             listavehiculos.layoutManager = LinearLayoutManager(activity)
-            //listavehiculos.adapter = AdaptadorElementos()
             var llenarLista = ArrayList<Elementos>()
             AsyncTask.execute {
                 val queue = Volley.newRequestQueue(activity)
-                val url = getString(R.string.urlAPI) + "/api/vehicles"
+                val url = getString(R.string.urlAPI) + "/plantas"
                 val stringRequest = JsonArrayRequest(url,
                         Response.Listener { response ->
                             try {
                                 for (i in 0 until response.length()) {
                                     val id =
-                                        response.getJSONObject(i).getString("_id")
+                                        response.getJSONObject(i).getString("id")
                                     val rfc =
                                         response.getJSONObject(i).getString("rfc")
                                     val nombre =
                                         response.getJSONObject(i).getString("nombre")
                                     val informacion =
                                         response.getJSONObject(i).getString("informacion")
+                                    val nombre_c =
+                                        response.getJSONObject(i).getString("nombre_cientifico")
                                     val imagen =
                                         response.getJSONObject(i).getString("img")
-                                    llenarLista.add(Elementos(id, rfc, nombre, informacion, imagen))
+                                    llenarLista.add(Elementos(id, rfc, nombre, informacion, nombre_c, imagen))
                                 }
-                                adapter = AdaptadorElementos(llenarLista)
+                                adapter = AdaptadorElementosPlantas(llenarLista)
                                 listavehiculos.adapter = adapter
 
                             } catch (e: JSONException) {
@@ -101,34 +102,36 @@ class SearchFragment : Fragment() {
 
 
         btnBuscarVehiculo.setOnClickListener(){
-            buscarVehiculo()
+            buscarPlanta()
         }
     }
-    fun buscarVehiculo() {
-        listavehiculos.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+    fun buscarPlanta() {
+
         listavehiculos.layoutManager = LinearLayoutManager(requireContext())
         var texto = txtBuscarVehiculo.text.toString()
         var llenarLista = ArrayList<Elementos>()
         AsyncTask.execute {
             val queue = Volley.newRequestQueue(activity)
-            val url = getString(R.string.urlAPI) + "/api/vehicles?q="+texto
+            val url = getString(R.string.urlAPI) + "/plantas?q="+texto
             val stringRequest = JsonArrayRequest(url,
                     Response.Listener { response ->
                         try {
                             for (i in 0 until response.length()) {
                                 val id =
-                                    response.getJSONObject(i).getString("_id")
+                                    response.getJSONObject(i).getString("id")
                                 val rfc =
                                     response.getJSONObject(i).getString("rfc")
                                 val nombre =
                                     response.getJSONObject(i).getString("nombre")
                                 val informacion =
                                     response.getJSONObject(i).getString("informacion")
+                                val nombre_c =
+                                    response.getJSONObject(i).getString("nombre_cientifico")
                                 val imagen =
                                     response.getJSONObject(i).getString("img")
-                                llenarLista.add(Elementos(id, rfc, nombre, informacion, imagen))
+                                llenarLista.add(Elementos(id, rfc, nombre, informacion, nombre_c, imagen))
                             }
-                            val adapter = AdaptadorElementos(llenarLista)
+                            val adapter = AdaptadorElementosPlantas(llenarLista)
                             listavehiculos.adapter = adapter
                         } catch (e: JSONException) {
                             Toast.makeText(

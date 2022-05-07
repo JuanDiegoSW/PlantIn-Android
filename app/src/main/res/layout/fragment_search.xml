@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/favorite"
+            android:background="@color/main"
             android:padding="16dp"
             android:paddingLeft="60dp"
             android:paddingRight="60dp">
@@ -38,11 +38,11 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:layout_marginLeft="5dp"
-                    android:gravity="left"
+                    android:gravity="center"
                     android:layout_gravity="center_vertical"
-                    android:hint="Buscar una vehiculo"
+                    android:hint="Buscar una planta"
                     android:inputType="text"
-                    android:textSize="14dp"/>
+                    android:textSize="18dp"/>
 
                 <ImageButton
                     android:id="@+id/btnBuscarVehiculo"
